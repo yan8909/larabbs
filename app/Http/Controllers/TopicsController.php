@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageUploadHandler;
+use App\Models\User;
 
 class TopicsController extends Controller
 {
@@ -63,12 +64,12 @@ class TopicsController extends Controller
 		return redirect()->to($topic->link())->with('success', 'Updated successfully.');
 	}
 
-	public function destroy(Topic $topic)
+	public function destroy(Topic $topic, User $user)
 	{
 		$this->authorize('destroy', $topic);
 		$topic->delete();
 
-		return redirect()->to($topic->link())->with('success', 'Deleted successfully.');
+		return redirect()->route('topics.index')->with('success', 'Deleted successfully.');
 	}
 
 	public function uploadImage(Request $request, ImageUploadHandler $uploader)
