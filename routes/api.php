@@ -42,8 +42,12 @@ $api->version('v1', [
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');
+            // 修改話題
             $api->patch('topics/{topic}', 'TopicsController@update')
                 ->name('api.topics.update');
+            // 刪除話題
+            $api->delete('topics/{topic}', 'TopicsController@destroy')
+                ->name('api.topics.destroy');
         });
     });
 
