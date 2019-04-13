@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Passport\HasApiTokens;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -14,6 +15,7 @@ class User extends Authenticatable implements JWTSubject
     use Traits\ActiveUserHelper;
     use Traits\LastActivedAtHelper;
     use HasRoles;
+    use HasApiTokens;
     // use MustVerifyEmailTrait;
     use Notifiable {
         notify as protected laravelNotify;
