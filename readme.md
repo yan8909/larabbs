@@ -1,69 +1,126 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## About LaraBBS
+LaraBBS is a simple forum application writen with Laravel. It's a practice learn from [《Web 开发实战进阶 - 从零开始构建论坛系统》](https://learnku.com/laravel/t/6592/laravel-tutorial-series-book-second-web-developer-combat-advanced-began-to-build-the-forum-system-from-zero)
 
-## About Laravel
+## Feature
+- User authentication —— Register、Login、Logout
+- Profile
+- Upload images
+- Multiple role manage
+- Notification
+- Custom Artisan command
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+## Build/Set up
+The enviroment is [Laravel Homestead](https://laravel.com/docs/5.8/homestead).
+The following description will be made assuming user has already installed homestead.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**1. Clone the source code**
+```
+> git clone git@github.com:yan8909/larabbs.git
+```
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+**2. Set up Homestead**
 
-## Learning Laravel
+1). run the commend to edit Homestead.yaml
+```
+> homestead edit
+```
+2). edit Homestead.yaml
+```
+folders:
+    - map: ~/my-path/larabbs/ # your project path
+      to: /home/vagrant/larabbs
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+sites:
+    - map: larabbs.test
+      to: /home/vagrant/larabbs/public
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+databases:
+    - larabbs
+```
+3). apply chandes
+```
+> homestead provision
+> homestead reload
+```
 
-## Laravel Sponsors
+**3. Install composer**
+```
+> composer install
+```
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+**4. Generate .env file**
+```
+> cp .env.example .env
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
+**5. Generate key**
+```
+> php artisan key:generate
+```
 
-## Contributing
+**6. Migration**
+```
+php artisan migrate --seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**7. Set up hosts file**
+```
+echo "192.168.10.10   phphub.app" | sudo tee -a /etc/hosts
+```
 
-## Security Vulnerabilities
+## Front-end set up
+1. install [node.js](https://nodejs.org/en/)
+2. install [Yarn](https://yarnpkg.com)
+3. install Laravel Mix
+```
+yarn install
+```
+4. running Mix
+```
+// run all Mix task...
+npm run dev
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+// Run all Mix tasks and minify output...
+npm run production
+```
+5. watching assets for changes
+```
+npm run watch
+```
+You may find that in certain environments Webpack isn't updating when your files change. If this is the case on your system, consider using the watch-poll command:
+```
+npm run watch-poll
+```
 
-## License
+## Links
+- Homepage : http://larabbs.test/
+- Admin : http://larabbs.test/admin
+admin account and password:
+```
+username: admin@test.com
+password: password
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Used package
+- [Intervention/image](https://github.com/Intervention/image)
+- [predis/predis](https://github.com/nrk/predis.git)
+- [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+- [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
+- [mewebstudio/Purifier](https://github.com/mewebstudio/Purifier)
+- [hieu-le/active](https://github.com/letrunghieu/active)
+- [summerblue/administrator](https://github.com/summerblue/administrator)
+- [viacreative/sudo-su](https://github.com/viacreative/sudo-su)
+- [laravel/horizon](https://github.com/laravel/horizon)
+
+## Custom Artisan command
+**Calculate active user :**
+```
+larabbs:calculate-active-user
+```
+
+**Record user's last active time to datebase from Redis**
+```
+larabbs:sync-user-actived-at
+```
+
