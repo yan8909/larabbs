@@ -2,6 +2,9 @@
 ## About LaraBBS
 LaraBBS is a simple forum application writen with Laravel. It's a practice learn from [《Web 开发实战进阶 - 从零开始构建论坛系统》](https://learnku.com/laravel/t/6592/laravel-tutorial-series-book-second-web-developer-combat-advanced-began-to-build-the-forum-system-from-zero)
 
+![alt demo](./larabbs-demo.gif)
+
+
 ## Feature
 - User authentication —— Register、Login、Logout
 - Profile
